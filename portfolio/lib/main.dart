@@ -38,20 +38,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset("images/Path 4.png"),
+                Image.asset("images/Path 2.png"),
+                Image.asset("images/Path 3.png"),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Image.asset("images/splach_image.png"),
           ],
         ),
       ),
