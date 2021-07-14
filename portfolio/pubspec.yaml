@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   auto_size_text: ^2.1.0
   flutter_sequence_animation: ^3.0.1
+  flutter_native_splash: ^1.2.0
+  animated_text: ^1.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -34,6 +36,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+    
+flutter_native_splash:
+  color: "#ffffff"
+  image: images/logo_profile.png
+  android: true
+  ios: true
+  android_gravity: center
+  ios_content_mode: center
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
