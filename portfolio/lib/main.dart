@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 import 'dart:math' as math;
 
+import 'homePage.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -116,6 +118,15 @@ class _SplashScreenState extends State<SplashScreen>
     controller.forward();
   }
 
+  void goToHomePage() {
+    controller.reset();
+    controller.reverse(from: 1000.0);
+    Future.delayed(Duration(milliseconds: 850), () {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -225,6 +236,8 @@ class _SplashScreenState extends State<SplashScreen>
                       onFinished: () {
                         // controller.reset();
                         // controller.reverse(from: 1000.0);
+                        goToHomePage();
+
                         print("Animtio0n finished");
                       },
                     ),
