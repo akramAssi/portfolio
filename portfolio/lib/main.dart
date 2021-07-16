@@ -195,7 +195,7 @@ class _SplashScreenState extends State<SplashScreen>
                     child: AnimatedText(
                       repeatCount: 1,
                       alignment: Alignment.center,
-                      speed: Duration(milliseconds: 1000),
+                      speed: Duration(milliseconds: 700),
                       controller: AnimatedTextController.play,
                       displayTime: Duration(milliseconds: 1000),
                       wordList: ['Akram Assi', 'welcome '],
@@ -222,7 +222,7 @@ class _SplashScreenState extends State<SplashScreen>
                     child: AnimatedText(
                       repeatCount: 1,
                       alignment: Alignment.centerRight,
-                      speed: Duration(milliseconds: 1000),
+                      speed: Duration(milliseconds: 700),
                       controller: AnimatedTextController.play,
                       displayTime: Duration(milliseconds: 1000),
                       wordList: ['Portfolio', '.... '],
@@ -258,14 +258,7 @@ class _SplashScreenState extends State<SplashScreen>
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.reset();
-          controller.reverse(from: 1000.0);
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
