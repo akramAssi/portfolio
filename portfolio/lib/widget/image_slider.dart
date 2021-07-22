@@ -7,13 +7,13 @@ import 'package:portfolio/res/color.dart';
 // ignore: must_be_immutable
 class PortfolioImageSlider extends StatefulWidget {
   List<String> imageList;
-  final String source;
+  // final String source;
   final bool autoPlay;
   final void Function(String) onLongPress;
   PortfolioImageSlider(
       {Key key,
       @required this.imageList,
-      @required this.source,
+      // @required this.source,
       this.autoPlay = true,
       this.onLongPress})
       : super(key: key);
@@ -33,33 +33,31 @@ class _CarouselWithIndicatorState extends State<PortfolioImageSlider> {
       // throw ("some arbitrary error");
       imageSliders = widget.imageList.map((item) {
         return Container(
-          child: Container(
-            margin:
-                EdgeInsets.only(top: 7.0, right: 7.0, left: 7.0, bottom: 15.0),
-            child: InkWell(
-                child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(35.0)),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.network(item, fit: BoxFit.cover, width: 1000.0)
-                      ],
-                    )),
-                onTap: () {
-                  final snackBar = SnackBar(
-                    backgroundColor: AppColor.background,
-                    content: Text('Long press to remove image'),
-                    action: SnackBarAction(
-                      textColor: Colors.white,
-                      label: 'close',
-                      onPressed: () {},
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                onLongPress: () {
-                  widget.onLongPress(item);
-                }),
-          ),
+          margin:
+              EdgeInsets.only(top: 7.0, right: 7.0, left: 7.0, bottom: 15.0),
+          child: InkWell(
+              child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(35.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.network(item, fit: BoxFit.cover, width: 1000.0)
+                    ],
+                  )),
+              onTap: () {
+                final snackBar = SnackBar(
+                  backgroundColor: AppColor.background,
+                  content: Text('Long press to remove image'),
+                  action: SnackBarAction(
+                    textColor: Colors.white,
+                    label: 'close',
+                    onPressed: () {},
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              onLongPress: () {
+                widget.onLongPress(item);
+              }),
         );
       }).toList();
     } catch (e) {
@@ -105,8 +103,8 @@ class _CarouselWithIndicatorState extends State<PortfolioImageSlider> {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: _current == index
-                      ? AppColor.brightNavyBlueFontcolor
-                      : AppColor.brightNavyBlueBackground,
+                      ? AppColor.listForeground[index % 6]
+                      : AppColor.listBackground[index % 6],
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black26, spreadRadius: .5, blurRadius: 2),
