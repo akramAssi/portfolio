@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Flexible(flex: 2, child: Image.asset("images/actor.png")),
                     Flexible(
@@ -50,13 +50,13 @@ class HomePage extends StatelessWidget {
                           Text("Hi, I’m  Akram Assi ",
                               style: TextStyle(
                                 fontFamily: "ComicSansMS",
-                                fontSize: 20,
+                                fontSize: 18,
                               )),
                           Text(
                               "This is my portfolio, which I use to display projects during my undergraduate years.",
                               style: TextStyle(
                                 fontFamily: "ComicSansMS",
-                                fontSize: 16,
+                                fontSize: 14,
                               )),
                         ],
                       ),
@@ -65,32 +65,35 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              Wrap(
-                spacing: 20,
-                runSpacing: 30,
-                alignment: WrapAlignment.spaceEvenly,
-                children: [
-                  buildTypeCard(
-                    name: "Web",
-                    backgroundColor: AppColor.melonBackground,
-                    foregroundColor: AppColor.melonFontcolor,
-                  ),
-                  buildTypeCard(
-                    name: "Mobile",
-                    backgroundColor: AppColor.babyPinkBackground,
-                    foregroundColor: AppColor.babyPinkFontcolor,
-                  ),
-                  buildTypeCard(
-                    name: "Desktop",
-                    backgroundColor: AppColor.brightNavyBlueBackground,
-                    foregroundColor: AppColor.brightNavyBlueFontcolor,
-                  ),
-                  buildTypeCard(
-                    name: "Script",
-                    backgroundColor: AppColor.lavenderBlueBackground,
-                    foregroundColor: AppColor.lavenderBlueFontcolor,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Wrap(
+                  spacing: 25,
+                  runSpacing: 30,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    buildTypeCard(
+                      name: "Web",
+                      backgroundColor: AppColor.melonBackground,
+                      foregroundColor: AppColor.melonFontcolor,
+                    ),
+                    buildTypeCard(
+                      name: "Mobile",
+                      backgroundColor: AppColor.babyPinkBackground,
+                      foregroundColor: AppColor.babyPinkFontcolor,
+                    ),
+                    buildTypeCard(
+                      name: "Desktop",
+                      backgroundColor: AppColor.brightNavyBlueBackground,
+                      foregroundColor: AppColor.brightNavyBlueFontcolor,
+                    ),
+                    buildTypeCard(
+                      name: "Script",
+                      backgroundColor: AppColor.lavenderBlueBackground,
+                      foregroundColor: AppColor.lavenderBlueFontcolor,
+                    ),
+                  ],
+                ),
               ),
               // ListView.builder(
               //     padding: const EdgeInsets.all(8),
@@ -112,12 +115,14 @@ class HomePage extends StatelessWidget {
   Container buildTypeCard(
       {String name, Color backgroundColor, Color foregroundColor}) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 183),
+      width: 170,
+      height: 90,
+      constraints: BoxConstraints(maxWidth: 183),
       decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(25))),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
@@ -127,12 +132,15 @@ class HomePage extends StatelessWidget {
               style: TextStyle(
                   color: foregroundColor,
                   fontFamily: "ComicSansMS",
-                  fontSize: 26),
+                  fontSize: 17),
             ),
             SizedBox(
-              width: 30,
+              width: 2,
             ),
-            Image.asset("images/web.png"),
+            Image.asset(
+              "images/$name.png",
+              width: name == "Desktop" ? 40 : 50,
+            ),
           ],
         ),
       ),
