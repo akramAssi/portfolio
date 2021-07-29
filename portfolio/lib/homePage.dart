@@ -19,8 +19,10 @@ class HomePage extends StatelessWidget {
           "flutter",
         ])
   ];
+
   @override
   Widget build(BuildContext context) {
+    final List indexList = Iterable<int>.generate(5).toList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -64,7 +66,6 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Wrap(
@@ -95,16 +96,56 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              // ListView.builder(
-              //     padding: const EdgeInsets.all(8),
-              //     itemCount: listProject.length,
-              //     itemBuilder: (BuildContext context, int index) {
-              //       return Container(
-              //         height: 50,
-              //         color: Colors.amber[colorCodes[index]],
-              //         child: Center(child: Text('Entry ${entries[index]}')),
-              //       );
-              //     })
+              Wrap(
+                spacing: 25,
+                runSpacing: 30,
+                alignment: WrapAlignment.center,
+                children: indexList
+                    .map((index) => Container(
+                          alignment: Alignment.bottomCenter,
+                          margin: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                    "https://play-lh.googleusercontent.com/qIiIyPtxKc903sdu1fgzU2UgH4Ju3ITY1ViYEu6zy2I3rdS8Q9t64uumt5ZmfZYXKg4=w720-h310-rw",
+                                  )),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: AppColor.listBackground[index % 6],
+                                    blurRadius: 1,
+                                    spreadRadius: .2)
+                              ]),
+                          width: 366,
+                          constraints: BoxConstraints(maxWidth: 366),
+                          height: 235,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.listBackground[index % 6],
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(25),
+                                  bottomRight: Radius.circular(25)),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 25),
+                            height: 50,
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Entry $index',
+                                  style: TextStyle(
+                                      color: AppColor.listForeground[index % 6],
+                                      fontFamily: "ComicSansMS",
+                                      fontSize: 20),
+                                )
+                              ],
+                            ),
+                          ),
+                        ))
+                    .toList()
+                    .cast<Widget>(),
+              ),
             ],
           ),
         ),
@@ -132,7 +173,7 @@ class HomePage extends StatelessWidget {
               style: TextStyle(
                   color: foregroundColor,
                   fontFamily: "ComicSansMS",
-                  fontSize: 17),
+                  fontSize: 20),
             ),
             SizedBox(
               width: 2,
