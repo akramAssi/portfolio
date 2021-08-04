@@ -17,6 +17,7 @@ class HomePage extends StatelessWidget {
         technologyStack: [
           "python",
           "flutter",
+          "android",
         ])
   ];
 
@@ -138,7 +139,16 @@ class HomePage extends StatelessWidget {
                                       color: AppColor.listForeground[index % 6],
                                       fontFamily: "ComicSansMS",
                                       fontSize: 20),
-                                )
+                                ),
+                                Row(
+                                  ma
+                                    children: listProject[0]
+                                        .technologyStack
+                                        .map((image) => Image.asset(
+                                              "images/$image.png",
+                                              width: 30,
+                                            ))
+                                        .toList()),
                               ],
                             ),
                           ),
@@ -146,6 +156,7 @@ class HomePage extends StatelessWidget {
                     .toList()
                     .cast<Widget>(),
               ),
+              // Image.asset("images/${listProject[0].technologyStack[0]}.png"),
             ],
           ),
         ),
