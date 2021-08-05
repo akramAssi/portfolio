@@ -147,7 +147,7 @@ class HomePage extends StatelessWidget {
                                         .map((image) => Shadow(
                                               opacity: 0.1,
                                               blur: Blur(30, 20),
-                                              // offset: Offset(0.1, -0.2),
+                                              offset: Offset(0.1, -0.2),
                                               child: Image.asset(
                                                 "images/$image.png",
                                                 width: 30,
