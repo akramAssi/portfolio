@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/model/project.dart';
+import 'package:portfolio/widget/info_Page.dart';
 import 'res/color.dart';
-import 'package:shadow/shadow.dart';
+// import 'package:shadow/shadow.dart';
 import 'widget/image_slider.dart';
+import 'widget/myShdow.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
@@ -61,6 +63,22 @@ class HomePage extends StatelessWidget {
                                 fontFamily: "ComicSansMS",
                                 fontSize: 14,
                               )),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            child: InkWell(
+                              onTap: () {
+                                print("dss");
+                              },
+                              child: Text("more -›",
+                                  style: TextStyle(
+                                    fontFamily: "ComicSansMS",
+                                    fontSize: 12,
+                                  )),
+                            ),
+                          ),
                         ],
                       ),
                     )
@@ -97,64 +115,75 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+
               Wrap(
                 spacing: 25,
                 runSpacing: 30,
                 alignment: WrapAlignment.center,
                 children: indexList
-                    .map((index) => Container(
-                          alignment: Alignment.bottomCenter,
-                          margin: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                    "https://play-lh.googleusercontent.com/qIiIyPtxKc903sdu1fgzU2UgH4Ju3ITY1ViYEu6zy2I3rdS8Q9t64uumt5ZmfZYXKg4=w720-h310-rw",
-                                  )),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: AppColor.listBackground[index % 6],
-                                    blurRadius: 1,
-                                    spreadRadius: .2)
-                              ]),
-                          width: 366,
-                          constraints: BoxConstraints(maxWidth: 366),
-                          height: 235,
-                          child: Container(
+                    .map((index) => InkWell(
+                          splashColor: AppColor.listBackground[index % 6],
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => InfoPage()),
+                            );
+                          },
+                          child: Ink(
+                            // alignment: Alignment.bottomCenter,
+                            // margin: EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: AppColor.listBackground[index % 6],
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(25),
-                                  bottomRight: Radius.circular(25)),
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 25),
-                            height: 50,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Entry $index',
-                                  style: TextStyle(
-                                      color: AppColor.listForeground[index % 6],
-                                      fontFamily: "ComicSansMS",
-                                      fontSize: 20),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      "https://play-lh.googleusercontent.com/qIiIyPtxKc903sdu1fgzU2UgH4Ju3ITY1ViYEu6zy2I3rdS8Q9t64uumt5ZmfZYXKg4=w720-h310-rw",
+                                    )),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: AppColor.listBackground[index % 6],
+                                      blurRadius: 1,
+                                      spreadRadius: .2)
+                                ]),
+                            width: 366,
+                            // constraints: BoxConstraints(maxWidth: 366),
+                            height: 235,
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColor.listBackground[index % 6],
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(25),
+                                      bottomRight: Radius.circular(25)),
                                 ),
-                                Row(
-                                    children: listProject[0]
-                                        .technologyStack
-                                        .map((image) => Shadow(
-                                              opacity: 0.1,
-                                              blur: Blur(30, 20),
-                                              offset: Offset(0.1, -0.2),
-                                              child: Image.asset(
-                                                "images/$image.png",
-                                                width: 30,
-                                              ),
-                                            ))
-                                        .toList()),
-                              ],
+                                padding: EdgeInsets.symmetric(horizontal: 25),
+                                height: 50,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Entry $index',
+                                      style: TextStyle(
+                                          color: AppColor
+                                              .listForeground[index % 6],
+                                          fontFamily: "ComicSansMS",
+                                          fontSize: 20),
+                                    ),
+                                    Row(
+                                        children: listProject[0]
+                                            .technologyStack
+                                            .map((image) => Image.asset(
+                                                  "images/$image.png",
+                                                  width: 30,
+                                                ))
+                                            .toList()),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ))
