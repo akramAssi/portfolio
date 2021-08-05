@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/model/project.dart';
 import 'res/color.dart';
-
+import 'package:shadow/shadow.dart';
 import 'widget/image_slider.dart';
 
 class HomePage extends StatelessWidget {
@@ -132,6 +132,7 @@ class HomePage extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 25),
                             height: 50,
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'Entry $index',
@@ -141,12 +142,16 @@ class HomePage extends StatelessWidget {
                                       fontSize: 20),
                                 ),
                                 Row(
-                                  ma
                                     children: listProject[0]
                                         .technologyStack
-                                        .map((image) => Image.asset(
-                                              "images/$image.png",
-                                              width: 30,
+                                        .map((image) => Shadow(
+                                              opacity: 0.1,
+                                              blur: Blur(30, 20),
+                                              // offset: Offset(0.1, -0.2),
+                                              child: Image.asset(
+                                                "images/$image.png",
+                                                width: 30,
+                                              ),
                                             ))
                                         .toList()),
                               ],
