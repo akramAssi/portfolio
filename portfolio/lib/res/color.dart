@@ -21,6 +21,7 @@ class AppColor {
   static Color opalFontcolor = Color(0XFF008373);
   //   background
   static Color background = Colors.white;
+  static Color fontColor = Color(0XFF201247);
 
   static List<Color> listBackground = [
     Color(0XCCF1B39C),
@@ -30,6 +31,7 @@ class AppColor {
     Color(0XCCC0C3E6),
     Color(0XCCF9D38A),
   ];
+
   static List<Color> listForeground = [
     Color(0XFFDD602A),
     Color(0XFF008373),
