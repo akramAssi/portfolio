@@ -54,14 +54,14 @@ class HomePage extends StatelessWidget {
                         children: [
                           Text("Hi, I’m  Akram Assi ",
                               style: TextStyle(
-                                fontFamily: "ComicSansMS",
+                                // color: AppColor.fontColor,
                                 fontSize: 18,
                               )),
                           Text(
                               "This is my portfolio, which I use to display projects during my undergraduate years.",
                               style: TextStyle(
-                                fontFamily: "ComicSansMS",
                                 fontSize: 14,
+                                color: AppColor.fontColor,
                               )),
                           SizedBox(
                             height: 3,
@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                               },
                               child: Text("more -›",
                                   style: TextStyle(
-                                    fontFamily: "ComicSansMS",
+                                    color: AppColor.fontColor,
                                     fontSize: 12,
                                   )),
                             ),
@@ -123,6 +123,7 @@ class HomePage extends StatelessWidget {
                 children: indexList
                     .map((index) => InkWell(
                           splashColor: AppColor.listBackground[index % 6],
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -139,8 +140,8 @@ class HomePage extends StatelessWidget {
                                     image: NetworkImage(
                                       "https://play-lh.googleusercontent.com/qIiIyPtxKc903sdu1fgzU2UgH4Ju3ITY1ViYEu6zy2I3rdS8Q9t64uumt5ZmfZYXKg4=w720-h310-rw",
                                     )),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25)),
+                                // borderRadius:
+                                //     BorderRadius.all(Radius.circular(25)),
                                 boxShadow: [
                                   BoxShadow(
                                       color: AppColor.listBackground[index % 6],
@@ -170,7 +171,6 @@ class HomePage extends StatelessWidget {
                                       style: TextStyle(
                                           color: AppColor
                                               .listForeground[index % 6],
-                                          fontFamily: "ComicSansMS",
                                           fontSize: 20),
                                     ),
                                     Row(
@@ -215,10 +215,7 @@ class HomePage extends StatelessWidget {
           children: [
             Text(
               name,
-              style: TextStyle(
-                  color: foregroundColor,
-                  fontFamily: "ComicSansMS",
-                  fontSize: 20),
+              style: TextStyle(color: foregroundColor, fontSize: 20),
             ),
             SizedBox(
               width: 2,
