@@ -1,9 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:portfolio/res/color.dart';
 import 'package:portfolio/widget/image_slider.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-class InfoPage extends StatelessWidget {
+class InfoPage extends StatefulWidget {
   InfoPage({Key key}) : super(key: key);
+
+  @override
+  _InfoPageState createState() => _InfoPageState();
+}
+
+class _InfoPageState extends State<InfoPage> {
   var technologyStack = [
     "web",
     "flutter",
@@ -12,9 +22,52 @@ class InfoPage extends StatelessWidget {
     "flutter",
     "ios",
   ];
+  YoutubePlayerController _controller;
+
+  void initState() {
+    super.initState();
+    _controller = YoutubePlayerController(
+      initialVideoId: '92vhSBYvKQI',
+      params: const YoutubePlayerParams(
+        playlist: [
+          '92vhSBYvKQI',
+          // 'K18cpp_-gP8',
+          // 'iLnmTe5Q2Qw',
+          // '_WoCV4c6XOE',
+          // 'KmzdUe0RSJo',
+          // '6jZDSSZZxjQ',
+          // 'p2lYr3vM_1w',
+          // '7QUtEmBT_-w',
+          // '34_PXCzGw1M',
+        ],
+        autoPlay: false,
+        showControls: true,
+        showFullscreenButton: true,
+        desktopMode: false,
+        privacyEnhanced: true,
+        useHybridComposition: false,
+      ),
+    );
+    _controller.onEnterFullscreen = () {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      // log('Entered Fullscreen');
+    };
+    // _controller.onExitFullscreen = () {
+    //   log('Exited Fullscreen');
+    // };
+  }
+
+  // void dispose() {
+  //   _controller.close();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    const player = YoutubePlayerIFrame();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -144,9 +197,55 @@ class InfoPage extends StatelessWidget {
                       )
                     ],
                   ),
+
                   SizedBox(
                     height: 25,
-                  )
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: YoutubePlayerControllerProvider(
+                      // Passing controller to widgets below.
+                      controller: _controller,
+                      child: Stack(
+                        children: [
+                          player,
+                          Positioned.fill(
+                            child: YoutubeValueBuilder(
+                              controller: _controller,
+                              builder: (context, value) {
+                                return AnimatedCrossFade(
+                                  firstChild: const SizedBox.shrink(),
+                                  secondChild: Material(
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              YoutubePlayerController
+                                                  .getThumbnail(
+                                            videoId: _controller
+                                                .params.playlist.first,
+                                            quality: ThumbnailQuality.medium,
+                                          )),
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                      child: const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  ),
+                                  crossFadeState: value.isReady
+                                      ? CrossFadeState.showFirst
+                                      : CrossFadeState.showSecond,
+                                  duration: const Duration(milliseconds: 300),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
