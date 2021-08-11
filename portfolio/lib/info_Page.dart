@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/res/color.dart';
-
-import 'image_slider.dart';
+import 'package:portfolio/widget/image_slider.dart';
 
 class InfoPage extends StatelessWidget {
-  const InfoPage({Key key}) : super(key: key);
+  InfoPage({Key key}) : super(key: key);
+  var technologyStack = [
+    "web",
+    "flutter",
+    "android",
+    "flask",
+    "flutter",
+    "ios",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +101,52 @@ class InfoPage extends StatelessWidget {
                   ///
                   ///end  descrip text for project
                   ///
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Wrap(
+                    spacing: 20,
+                    runSpacing: 12,
+                    children: technologyStack
+                        .map((item) => Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 3),
+                              decoration: BoxDecoration(
+                                  color: AppColor.background,
+                                  borderRadius: BorderRadius.circular(6),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 6,
+                                        color: Colors.black12,
+                                        offset: Offset(0.2, 2))
+                                  ]),
+                              child: Text(item),
+                            ))
+                        .toList(),
+                  ),
+
+                  ///
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset("images/youtube.png"),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        "Youtube",
+                        style: TextStyle(
+                          color: AppColor.fontColor,
+                          fontSize: 25,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  )
                 ],
               ),
             ),
