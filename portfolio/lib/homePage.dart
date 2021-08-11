@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/info_Page.dart';
 import 'package:portfolio/model/project.dart';
-import 'package:portfolio/widget/info_Page.dart';
 import 'res/color.dart';
-// import 'package:shadow/shadow.dart';
 import 'widget/image_slider.dart';
-import 'widget/myShdow.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
@@ -140,8 +138,8 @@ class HomePage extends StatelessWidget {
                                     image: NetworkImage(
                                       "https://play-lh.googleusercontent.com/qIiIyPtxKc903sdu1fgzU2UgH4Ju3ITY1ViYEu6zy2I3rdS8Q9t64uumt5ZmfZYXKg4=w720-h310-rw",
                                     )),
-                                // borderRadius:
-                                //     BorderRadius.all(Radius.circular(25)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
                                 boxShadow: [
                                   BoxShadow(
                                       color: AppColor.listBackground[index % 6],
@@ -222,7 +220,11 @@ class HomePage extends StatelessWidget {
             ),
             Image.asset(
               "images/$name.png",
-              width: name == "Desktop" ? 40 : 50,
+              width: name == "Web"
+                  ? 50
+                  : name == "Desktop"
+                      ? 38
+                      : 45,
             ),
           ],
         ),
