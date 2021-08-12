@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/info_Page.dart';
 import 'package:portfolio/model/project.dart';
+import 'package:portfolio/profile_page.dart';
 import 'res/color.dart';
 import 'widget/image_slider.dart';
 
@@ -20,6 +21,15 @@ class HomePage extends StatelessWidget {
           "android",
         ])
   ];
+
+  void _openProfilePage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) => ProfilePage(),
+        // fullscreenDialog: true,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +62,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           Text("Hi, I’m  Akram Assi ",
                               style: TextStyle(
-                                // color: AppColor.fontColor,
+                                color: AppColor.fontColor,
                                 fontSize: 18,
                               )),
                           Text(
@@ -68,7 +78,7 @@ class HomePage extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: InkWell(
                               onTap: () {
-                                print("dss");
+                                _openProfilePage(context);
                               },
                               child: Text("more -›",
                                   style: TextStyle(
@@ -176,7 +186,7 @@ class HomePage extends StatelessWidget {
                                             .technologyStack
                                             .map((image) => Image.asset(
                                                   "images/$image.png",
-                                                  width: 30,
+                                                  height: 30,
                                                 ))
                                             .toList()),
                                   ],

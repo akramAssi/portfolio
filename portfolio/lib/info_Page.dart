@@ -131,7 +131,10 @@ class _InfoPageState extends State<InfoPage> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Image.asset("images/github.png")
+                              Image.asset(
+                                "images/github.png",
+                                width: 35,
+                              )
                             ],
                           ))
                     ],
@@ -173,7 +176,10 @@ class _InfoPageState extends State<InfoPage> {
                                         color: Colors.black12,
                                         offset: Offset(0.2, 2))
                                   ]),
-                              child: Text(item),
+                              child: Text(
+                                item,
+                                style: TextStyle(color: AppColor.fontColor),
+                              ),
                             ))
                         .toList(),
                   ),
