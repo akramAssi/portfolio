@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/res/color.dart';
+import 'package:portfolio/widget/app_bar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key key}) : super(key: key);
@@ -7,22 +8,17 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: AppColor.fontColor, //change your color here
-        ),
-        backgroundColor: AppColor.background,
-        elevation: 0,
-      ),
+      extendBodyBehindAppBar: true,
+      appBar: portfolioAppBar(withBackground: false),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
           child: Column(
             children: [
-              // SizedBox(
-              //   height: 30,
-              // ),
+              SizedBox(
+                height: 80,
+              ),
               Image.asset("images/actor@X2.png"),
               SizedBox(
                 height: 55,
