@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:portfolio/res/color.dart';
+import 'package:portfolio/widget/app_bar.dart';
+import 'package:portfolio/widget/body_text.dart';
 import 'package:portfolio/widget/image_slider.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -69,23 +71,27 @@ class _InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     const player = YoutubePlayerIFrame();
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Image.asset(
-            "images/x.png",
-          ),
-        ),
-        elevation: 0,
-        title: Text("SOUQY",
-            style: TextStyle(
-              color: AppColor.fontColor,
-              fontSize: 23,
-            )),
-        backgroundColor: AppColor.background,
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   leading: IconButton(
+      //     onPressed: () {
+      //       Navigator.of(context).pop();
+      //     },
+      //     icon: Image.asset(
+      //       "images/x.png",
+      //     ),
+      //   ),
+      //   elevation: 0,
+      //   title: Text("SOUQY",
+      //       style: TextStyle(
+      //         color: AppColor.fontColor,
+      //         fontSize: 23,
+      //       )),
+      //   backgroundColor: AppColor.background,
+      // ),
+      appBar: portfolioAppBar(
+        context: context,
+        title: "SOUQY",
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -109,12 +115,9 @@ class _InfoPageState extends State<InfoPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "SOUQY",
-                        style: TextStyle(
-                          color: AppColor.fontColor,
-                          fontSize: 25,
-                        ),
+                      bodyText(
+                        text: "SOUQY",
+                        fontSize: 25,
                       ),
                       TextButton(
                           style: TextButton.styleFrom(
@@ -123,10 +126,9 @@ class _InfoPageState extends State<InfoPage> {
                           onPressed: () {},
                           child: Row(
                             children: [
-                              Text(
-                                "Source code",
-                                style: TextStyle(
-                                    color: AppColor.fontColor, fontSize: 17),
+                              bodyText(
+                                text: "Source code",
+                                fontSize: 17,
                               ),
                               SizedBox(
                                 width: 5,
@@ -148,9 +150,12 @@ class _InfoPageState extends State<InfoPage> {
                   ///
                   Container(
                     alignment: Alignment.center,
-                    child: Text(
-                      "Text messaging templates provide pre-set text that can be used to quickly send common text messages without typing the message itself. For example, if you are “running late” or “in a meeting”, this feature lets you send those replies simply by choosing them from a menu, instead of typing out the whole phrase.",
-                      style: TextStyle(color: AppColor.fontColor, fontSize: 15),
+                    child: bodyText(
+                      text: "Text messaging templates provide pre-set text that can be" +
+                          " used to quickly send common text messages without typing the message itself." +
+                          " For example, if you are “running late” or “in a meeting”, this feature lets you " +
+                          "send those replies simply by choosing them from a menu, instead of typing out the whole phrase.",
+                      fontSize: 15,
                     ),
                   ),
 
@@ -173,7 +178,7 @@ class _InfoPageState extends State<InfoPage> {
                                   boxShadow: [
                                     BoxShadow(
                                         blurRadius: 6,
-                                        color: Colors.black12,
+                                        color: Colors.grey[300],
                                         offset: Offset(0.2, 2))
                                   ]),
                               child: Text(
