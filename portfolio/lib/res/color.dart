@@ -14,11 +14,14 @@ class AppColor {
   static Color lavenderBlueBackground = Color(0XCCC0C3E6);
   static Color lavenderBlueFontcolor = Color(0XFF553AD7);
   //   Deep Champagne
-  static Color deepChampagneBackground = Color(0XCCF9D38A);
+  static Color deepChampagneBackground = Color(0XFFF9D38A);
   static Color deepChampagneFontcolor = Color(0XFFDD9D17);
   //   Opal  Blue
-  static Color opalBackground = Color(0XCCB6D0C7);
+  static Color opalBackground = Color(0XFFB6D0C7);
   static Color opalFontcolor = Color(0XFF008373);
+  //   Dairy Cream
+  static Color dairyCreamBackground = Color(0XFFFAD8BE);
+  static Color dairyCreamFontcolor = Color(0XFFFC6E60);
   //   background
   static Color background = Colors.white;
   static Color fontColor = Color(0XFF201247);
