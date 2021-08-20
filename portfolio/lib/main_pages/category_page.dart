@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/info_Page.dart';
+import 'package:portfolio/main_pages/info_Page.dart';
 import 'package:portfolio/model/project.dart';
 import 'package:portfolio/res/color.dart';
 import 'package:portfolio/widget/app_bar.dart';
@@ -35,7 +35,7 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List indexList = Iterable<int>.generate(5).toList();
     return Scaffold(
-      appBar: portfolioAppBar(title: title),
+      appBar: portfolioAppBar(context: context, title: title),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,

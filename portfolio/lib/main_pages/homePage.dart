@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/category_page.dart';
-import 'package:portfolio/info_Page.dart';
+import 'package:portfolio/main_pages/category_page.dart';
+import 'package:portfolio/main_pages/info_Page.dart';
+import 'package:portfolio/main_pages/login_page.dart';
 import 'package:portfolio/model/project.dart';
-import 'package:portfolio/profile_page.dart';
+import 'package:portfolio/main_pages/profile_page.dart';
 import 'package:portfolio/widget/body_text.dart';
-import 'res/color.dart';
-import 'widget/image_slider.dart';
+import 'package:portfolio/widget/scroll_to_hide_widget.dart';
+import '../res/color.dart';
+import '../widget/image_slider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final List<Project> listProject = [
     Project(
         images: [
@@ -24,8 +32,21 @@ class HomePage extends StatelessWidget {
         ])
   ];
 
-  void _openProfilePage(BuildContext context,
-      {bool fullscreenDialog: false, Widget page}) {
+  ScrollController controller;
+  @override
+  void initState() {
+    super.initState();
+
+    controller = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  void _openProfilePage({bool fullscreenDialog: false, Widget page}) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (context) => page,
@@ -37,92 +58,74 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List indexList = Iterable<int>.generate(5).toList();
+    final List indexList = Iterable<int>.generate(10).toList();
     return Scaffold(
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          // backgroundBlendMode: BlendMode.
-          gradient: LinearGradient(
-            colors: [
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              // Color(0XFF),
-              //green <- blue
-              Color(0XFFb2c6de),
-              Color(0XFFa0d0ec),
-              Color(0XFF87dbf3),
-              Color(0XFF6ee6f1),
-              Color(0XFF63f0e4),
-              Color(0XFF60efd6),
-              Color(0XFF63edc7),
-              Color(0XFF6aebb7),
-              Color(0XFF5ee0ad),
-              Color(0XFF53d5a3),
-              Color(0XFF46cb99),
-              Color(0XFF39c08f),
-              //green
-              // Color(0XFFb2c6de),
-              // Color(0XFFb2cde1),
-              // Color(0XFFb4d4e2),
-              // Color(0XFFb9dbe3),
-              // Color(0XFFc0e1e3),
-              // Color(0XFFb7dbdb),
-              // Color(0XFFadd5d2),
-              // Color(0XFFa5cfc9),
-              // Color(0XFF87bcb5),
-              // Color(0XFF69aaa2),
-              // Color(0XFF49978f),
-              // Color(0XFF20857c),
-              //blue
-              // Color(0XFFb2c6de),
-              // Color(0XFFadc9e3),
-              // Color(0XFFa8cce7),
-              // Color(0XFFa2d0ea),
-              // Color(0XFF9bd3ed),
-              // Color(0XFF95d6ef),
-              // Color(0XFF8fd8f0),
-              // Color(0XFF88dbf1),
-              // Color(0XFF81def1),
-              // Color(0XFF7ae2f0),
-              // Color(0XFF74e5ee),
-              // Color(0XFF70e8eb),
-            ],
-          ),
-        ),
-        child: Row(
-          children: [
-            Column(
+      bottomNavigationBar: ScrollToHideWidget(
+        controller: controller,
+        child: Container(
+          color: Colors.transparent,
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            // constraints: BoxConstraints(maxWidth: 300, minWidth: 300),
+            height: 56,
+            width: 500,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(25), topLeft: Radius.circular(25)),
+              // backgroundBlendMode: BlendMode.
+              color: AppColor.opalBackground,
+              // gradient: LinearGradient(
+              //   begin: Alignment.bottomLeft,
+              //   end: Alignment.topRight,
+              //   colors: [
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     // Color(0XFF),
+              //     Color(0XFFb6d0c7),
+              //     Color(0XFFb5d6bc),
+              //     Color(0XFFc1d9aa),
+              //     Color(0XFFd9d897),
+              //     Color(0XFFf9d38a),
+
+              //     //blue
+              //     // Color(0XFFb2c6de),
+              //     // Color(0XFFadc9e3),
+              //     // Color(0XFFa8cce7),
+              //     // Color(0XFFa2d0ea),
+              //     // Color(0XFF9bd3ed),
+              //     // Color(0XFF95d6ef),
+              //     // Color(0XFF8fd8f0),
+              //     // Color(0XFF88dbf1),
+              //     // Color(0XFF81def1),
+              //     // Color(0XFF7ae2f0),
+              //     // Color(0XFF74e5ee),
+              //     // Color(0XFF70e8eb),
+              //   ],
+              // ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.ac_unit,
-                  color: Colors.white,
-                ),
-                Text("Profile")
+                buildMenuButton(Icons.person, "Profile", true, ProfilePage()),
+                buildMenuButton(Icons.login, "Login", false, LoginPage()),
               ],
             ),
-            Column(
-              children: [
-                Icon(
-                  Icons.login,
-                  color: Colors.white,
-                ),
-                Text("Login")
-              ],
-            )
-          ],
+          ),
         ),
       ),
       body: SingleChildScrollView(
+        controller: controller,
         child: Container(
           margin: EdgeInsets.only(top: 50),
           child: Column(
@@ -141,7 +144,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Flexible(flex: 2, child: Image.asset("images/actor.png")),
+                    Flexible(flex: 2, child: Image.asset("images/actor1.png")),
                     Flexible(
                       flex: 3,
                       child: Column(
@@ -164,9 +167,9 @@ class HomePage extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: InkWell(
                               onTap: () {
-                                _openProfilePage(context,
-                                    page: ProfilePage(),
-                                    fullscreenDialog: true);
+                                _openProfilePage(
+                                  page: ProfilePage(),
+                                );
                               },
                               child: bodyText(
                                 text: "more -›",
@@ -300,6 +303,42 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Expanded buildMenuButton(
+      IconData icon, String title, bool left, Widget page) {
+    return Expanded(
+      flex: 1,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: left
+              ? BorderRadius.only(topLeft: Radius.circular(25))
+              : BorderRadius.only(topRight: Radius.circular(25)),
+          onTap: () {
+            _openProfilePage(page: page);
+          },
+          // splashColor:
+          //     left ? AppColor.opalBackground : AppColor.deepChampagneBackground,
+          splashColor: AppColor.opalFontcolor,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  height: 2.5,
+                ),
+                Text(title)
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   InkWell buildTypeCard(
       {BuildContext context,
       String name,
@@ -309,7 +348,6 @@ class HomePage extends StatelessWidget {
       borderRadius: BorderRadius.circular(25),
       onTap: () {
         _openProfilePage(
-          context,
           page: CategoryPage(
             title: name,
           ),

@@ -2,7 +2,7 @@ import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 import 'package:animated_text/animated_text.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'homePage.dart';
+import 'main_pages/homePage.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({

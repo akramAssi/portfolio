@@ -9,7 +9,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: portfolioAppBar(withBackground: false),
+      appBar: portfolioAppBar(context: context, withBackground: false),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
