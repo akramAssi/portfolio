@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/edit_pages/category_page_edit.dart';
+import 'package:portfolio/edit_pages/profile_page_edit.dart';
 import 'package:portfolio/main_pages/category_page.dart';
 import 'package:portfolio/main_pages/info_Page.dart';
 import 'package:portfolio/login_page.dart';
@@ -7,6 +9,7 @@ import 'package:portfolio/main_pages/profile_page.dart';
 import 'package:portfolio/portfolio_function.dart';
 import 'package:portfolio/widget/app_bar_widget.dart';
 import 'package:portfolio/widget/body_text_widget.dart';
+import 'package:portfolio/widget/list_project_widget.dart';
 import 'package:portfolio/widget/scroll_to_hide_widget.dart';
 import '../res/color.dart';
 import '../widget/image_slider_widget.dart';
@@ -20,7 +23,10 @@ class HomePageEdit extends StatefulWidget {
 
 class _HomePageEditState extends State<HomePageEdit> {
   TextEditingController _welecamTextController;
-  TextEditingController _breifTextController;
+  TextEditingController _briefTextController;
+  bool editMood = false;
+  String welcomeText;
+  String briefText;
   final List<Project> listProject = [
     Project(
         images: [
@@ -46,8 +52,8 @@ class _HomePageEditState extends State<HomePageEdit> {
     _welecamTextController = TextEditingController();
     _welecamTextController.text = "Hi, I’m  Akram Assi ";
 // breif text controller
-    _breifTextController = TextEditingController();
-    _breifTextController.text =
+    _briefTextController = TextEditingController();
+    _briefTextController.text =
         "This is my portfolio, which I use to display projects " +
             "during my undergraduate years.";
   }
@@ -56,6 +62,8 @@ class _HomePageEditState extends State<HomePageEdit> {
   void dispose() {
     super.dispose();
     scrollController.dispose();
+    _welecamTextController.dispose();
+    _briefTextController.dispose();
   }
 
   void _openProfilePage({bool fullscreenDialog: false, Widget page}) {
@@ -66,6 +74,32 @@ class _HomePageEditState extends State<HomePageEdit> {
         fullscreenDialog: fullscreenDialog,
       ),
     );
+  }
+
+  void enableEditMode() {
+    setState(() {
+      editMood = true;
+      welcomeText = _welecamTextController.text;
+      briefText = _briefTextController.text;
+    });
+  }
+
+  void disableEditMode() {
+    setState(() {
+      editMood = false;
+      _welecamTextController.text = welcomeText;
+      _briefTextController.text = briefText;
+      welcomeText = null;
+      briefText = null;
+    });
+  }
+
+  void saveText() {
+    setState(() {
+      editMood = false;
+      welcomeText = null;
+      briefText = null;
+    });
   }
 
   @override
@@ -123,40 +157,8 @@ class _HomePageEditState extends State<HomePageEdit> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        // IconButton(
-                        //   onPressed: () {},
-                        //   icon: Icon(
-                        //     Icons.edit,
-                        //     color: AppColor.fontColor,
-                        //   ),
-                        // ),
-                        Visibility(
-                            child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.check,
-                                color: AppColor.fontColor,
-                              ),
-                            ),
-                            // SizedBox(
-                            //   width: 0,
-                            // ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.close_sharp,
-                                color: AppColor.fontColor,
-                              ),
-                            )
-                          ],
-                        ))
-                      ],
-                    ),
+                    buildEditButtonBar(
+                        enableEditMode, disableEditMode, saveText, editMood),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -170,21 +172,11 @@ class _HomePageEditState extends State<HomePageEdit> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              editText(_welecamTextController, 18),
-                              // bodyText(
-                              //   text: "Hi, I’m  Akram Assi ",
-                              //   fontSize: 18,
-                              // ),
+                              editText(_welecamTextController, 18, editMood),
                               SizedBox(
                                 height: 2,
                               ),
-                              editText(_breifTextController, 14),
-                              // bodyText(
-                              //   text:
-                              //       "This is my portfolio, which I use to display projects " +
-                              //           "during my undergraduate years.",
-                              //   fontSize: 14,
-                              // ),
+                              editText(_briefTextController, 14, editMood),
                               SizedBox(
                                 height: 3,
                               ),
@@ -193,7 +185,7 @@ class _HomePageEditState extends State<HomePageEdit> {
                                 child: InkWell(
                                   onTap: () {
                                     _openProfilePage(
-                                      page: ProfilePage(),
+                                      page: ProfilePageEdit(),
                                     );
                                   },
                                   child: bodyText(
@@ -207,124 +199,53 @@ class _HomePageEditState extends State<HomePageEdit> {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 18,
+                    // SizedBox(
+                    //   height: 18,
+                    // ),
+
+                    //     SizedBox(
+                    //       height: 10,
+                    //     ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Wrap(
+                  spacing: 25,
+                  runSpacing: 30,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    buildTypeCard(
+                      name: "Web",
+                      context: context,
+                      backgroundColor: AppColor.melonBackground,
+                      foregroundColor: AppColor.melonFontcolor,
                     ),
-                    Wrap(
-                      spacing: 25,
-                      runSpacing: 30,
-                      alignment: WrapAlignment.center,
-                      children: [
-                        buildTypeCard(
-                          name: "Web",
-                          context: context,
-                          backgroundColor: AppColor.melonBackground,
-                          foregroundColor: AppColor.melonFontcolor,
-                        ),
-                        buildTypeCard(
-                          name: "Mobile",
-                          context: context,
-                          backgroundColor: AppColor.babyPinkBackground,
-                          foregroundColor: AppColor.babyPinkFontcolor,
-                        ),
-                        buildTypeCard(
-                          name: "Desktop",
-                          context: context,
-                          backgroundColor: AppColor.brightNavyBlueBackground,
-                          foregroundColor: AppColor.brightNavyBlueFontcolor,
-                        ),
-                        buildTypeCard(
-                          name: "Script",
-                          context: context,
-                          backgroundColor: AppColor.lavenderBlueBackground,
-                          foregroundColor: AppColor.lavenderBlueFontcolor,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
+                    buildTypeCard(
+                      name: "Mobile",
+                      context: context,
+                      backgroundColor: AppColor.babyPinkBackground,
+                      foregroundColor: AppColor.babyPinkFontcolor,
+                    ),
+                    buildTypeCard(
+                      name: "Desktop",
+                      context: context,
+                      backgroundColor: AppColor.brightNavyBlueBackground,
+                      foregroundColor: AppColor.brightNavyBlueFontcolor,
+                    ),
+                    buildTypeCard(
+                      name: "Script",
+                      context: context,
+                      backgroundColor: AppColor.lavenderBlueBackground,
+                      foregroundColor: AppColor.lavenderBlueFontcolor,
                     ),
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.all(15.0),
-              //   child:
-              // ),
-
-              Wrap(
-                spacing: 25,
-                runSpacing: 30,
-                alignment: WrapAlignment.center,
-                children: indexList
-                    .map((index) => InkWell(
-                          splashColor: AppColor.listBackground[index % 6],
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InfoPage()),
-                            );
-                          },
-                          child: Ink(
-                            // alignment: Alignment.bottomCenter,
-                            // margin: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      "https://play-lh.googleusercontent.com/qIiIyPtxKc903sdu1fgzU2UgH4Ju3ITY1ViYEu6zy2I3rdS8Q9t64uumt5ZmfZYXKg4=w720-h310-rw",
-                                    )),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: AppColor.listBackground[index % 6],
-                                      blurRadius: 1,
-                                      spreadRadius: .2)
-                                ]),
-                            width: 366,
-                            // constraints: BoxConstraints(maxWidth: 366),
-                            height: 235,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppColor.listBackground[index % 6],
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(25),
-                                      bottomRight: Radius.circular(25)),
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                height: 50,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Entry $index',
-                                      style: TextStyle(
-                                          color: AppColor
-                                              .listForeground[index % 6],
-                                          fontSize: 20),
-                                    ),
-                                    Row(
-                                        children: listProject[0]
-                                            .technologyStack
-                                            .map((image) => Image.asset(
-                                                  "images/$image.png",
-                                                  height: 30,
-                                                ))
-                                            .toList()),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList()
-                    .cast<Widget>(),
+              ListCard(
+                listProject: listProject,
+                isAdmin: true,
               ),
               SizedBox(
                 height: 30,
@@ -382,7 +303,7 @@ class _HomePageEditState extends State<HomePageEdit> {
       borderRadius: BorderRadius.circular(25),
       onTap: () {
         _openProfilePage(
-          page: CategoryPage(
+          page: CategoryPageEdit(
             title: name,
           ),
         );

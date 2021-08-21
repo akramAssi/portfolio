@@ -74,12 +74,21 @@ InkWell buildTypeCard(
   );
 }
 
-TextField editText(TextEditingController controller, double fontSize) {
+TextField editText(
+  TextEditingController controller,
+  double fontSize,
+  bool editable, {
+  TextAlign textAlign = TextAlign.start,
+}) {
   return TextField(
     controller: controller,
     style: TextStyle(color: AppColor.fontColor, fontSize: fontSize),
-    keyboardType: TextInputType.text,
+    textAlign: textAlign,
+    // keyboardType: TextInputType.text,
     maxLines: null,
+    enabled: editable,
+    // readOnly: editable,
+    selectionControls: null,
     decoration: InputDecoration(
         border: InputBorder.none,
         focusedBorder: InputBorder.none,
@@ -89,5 +98,47 @@ TextField editText(TextEditingController controller, double fontSize) {
         contentPadding: EdgeInsets.zero,
         isDense: true,
         hintText: "Hint here"),
+  );
+}
+
+Row buildEditButtonBar(void Function() enableEditMode,
+    VoidCallback disableEditMode, VoidCallback saveText, editMood) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      Visibility(
+        visible: !editMood,
+        child: IconButton(
+          onPressed: enableEditMode,
+          icon: Icon(
+            Icons.edit,
+            color: AppColor.fontColor,
+          ),
+        ),
+      ),
+      Visibility(
+          visible: editMood,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: saveText,
+                icon: Icon(
+                  Icons.check,
+                  color: AppColor.opalFontcolor,
+                ),
+              ),
+              IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: disableEditMode,
+                icon: Icon(
+                  Icons.close_sharp,
+                  color: AppColor.babyPinkFontcolor,
+                ),
+              )
+            ],
+          ))
+    ],
   );
 }

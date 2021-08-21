@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/edit_pages/info_Page_edit.dart';
 import 'package:portfolio/main_pages/info_Page.dart';
 import 'package:portfolio/model/project.dart';
 import 'package:portfolio/res/color.dart';
@@ -9,10 +10,11 @@ class ListCard extends StatelessWidget {
   const ListCard({
     Key key,
     @required this.listProject,
+    this.isAdmin = false,
   }) : super(key: key);
 
   final List<Project> listProject;
-
+  final isAdmin;
   @override
   Widget build(BuildContext context) {
     final List indexList = Iterable<int>.generate(10).toList();
@@ -25,7 +27,13 @@ class ListCard extends StatelessWidget {
               splashColor: AppColor.listBackground[index % 6],
               borderRadius: BorderRadius.all(radius),
               onTap: () {
-                openPage(context, InfoPage());
+                openPage(
+                    context,
+                    isAdmin
+                        ? InfoPageEdit(
+                            projectName: "SOUQY",
+                          )
+                        : InfoPage());
               },
               child: Ink(
                   decoration: BoxDecoration(
