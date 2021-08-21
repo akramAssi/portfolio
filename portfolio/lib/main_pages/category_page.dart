@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/main_pages/info_Page.dart';
 import 'package:portfolio/model/project.dart';
 import 'package:portfolio/res/color.dart';
-import 'package:portfolio/widget/app_bar.dart';
+import 'package:portfolio/widget/app_bar_widget.dart';
+import 'package:portfolio/widget/list_project_widget.dart';
 
 class CategoryPage extends StatelessWidget {
   final String title;
@@ -73,80 +74,7 @@ class CategoryPage extends StatelessWidget {
               SizedBox(
                 height: 45,
               ),
-              Wrap(
-                spacing: 25,
-                runSpacing: 30,
-                alignment: WrapAlignment.center,
-                children: indexList
-                    .map((index) => InkWell(
-                          splashColor: AppColor.listBackground[index % 6],
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InfoPage()),
-                            );
-                          },
-                          child: Ink(
-                            // alignment: Alignment.bottomCenter,
-                            // margin: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      "https://play-lh.googleusercontent.com/qIiIyPtxKc903sdu1fgzU2UgH4Ju3ITY1ViYEu6zy2I3rdS8Q9t64uumt5ZmfZYXKg4=w720-h310-rw",
-                                    )),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: AppColor.listBackground[index % 6],
-                                      blurRadius: 1,
-                                      spreadRadius: .2)
-                                ]),
-                            width: 366,
-                            // constraints: BoxConstraints(maxWidth: 366),
-                            height: 235,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppColor.listBackground[index % 6],
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(25),
-                                      bottomRight: Radius.circular(25)),
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                height: 50,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Entry $index',
-                                      style: TextStyle(
-                                          color: AppColor
-                                              .listForeground[index % 6],
-                                          fontSize: 20),
-                                    ),
-                                    Row(
-                                        children: listProject[0]
-                                            .technologyStack
-                                            .map((image) => Image.asset(
-                                                  "images/$image.png",
-                                                  height: 30,
-                                                ))
-                                            .toList()),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList()
-                    .cast<Widget>(),
-              ),
+              ListCard(listProject: listProject),
               SizedBox(
                 height: 30,
               ),

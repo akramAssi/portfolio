@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:portfolio/res/color.dart';
-import 'package:portfolio/widget/app_bar.dart';
-import 'package:portfolio/widget/body_text.dart';
-import 'package:portfolio/widget/image_slider.dart';
+import 'package:portfolio/widget/app_bar_widget.dart';
+import 'package:portfolio/widget/body_text_widget.dart';
+import 'package:portfolio/widget/image_slider_widget.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class InfoPage extends StatefulWidget {
@@ -71,24 +71,6 @@ class _InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     const player = YoutubePlayerIFrame();
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Navigator.of(context).pop();
-      //     },
-      //     icon: Image.asset(
-      //       "images/x.png",
-      //     ),
-      //   ),
-      //   elevation: 0,
-      //   title: Text("SOUQY",
-      //       style: TextStyle(
-      //         color: AppColor.fontColor,
-      //         fontSize: 23,
-      //       )),
-      //   backgroundColor: AppColor.background,
-      // ),
       appBar: portfolioAppBar(
         context: context,
         title: "SOUQY",

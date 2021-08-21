@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/res/color.dart';
-import 'package:portfolio/widget/app_bar.dart';
+import 'package:portfolio/widget/app_bar_widget.dart';
+import 'package:portfolio/portfolio_function.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key key}) : super(key: key);
@@ -48,24 +49,32 @@ class ProfilePage extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 children: [
                   buildTypeCard(
+                    context,
                     name: "Web",
                     backgroundColor: AppColor.melonBackground,
                     foregroundColor: AppColor.melonFontcolor,
+                    multiSizeIcon: false,
                   ),
                   buildTypeCard(
+                    context,
                     name: "Android",
                     backgroundColor: AppColor.opalBackground,
                     foregroundColor: AppColor.opalFontcolor,
+                    multiSizeIcon: false,
                   ),
                   buildTypeCard(
+                    context,
                     name: "Flutter",
                     backgroundColor: AppColor.brightNavyBlueBackground,
                     foregroundColor: AppColor.brightNavyBlueFontcolor,
+                    multiSizeIcon: false,
                   ),
                   buildTypeCard(
+                    context,
                     name: "Python",
                     backgroundColor: AppColor.lavenderBlueBackground,
                     foregroundColor: AppColor.lavenderBlueFontcolor,
+                    multiSizeIcon: false,
                   ),
                 ],
               ),
@@ -117,42 +126,5 @@ class ProfilePage extends StatelessWidget {
           name,
           style: TextStyle(fontSize: 15, color: AppColor.fontColor),
         ));
-  }
-
-  Container buildTypeCard(
-      {String name, Color backgroundColor, Color foregroundColor}) {
-    return Container(
-      width: 170,
-      height: 90,
-      constraints: BoxConstraints(maxWidth: 183),
-      decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.all(Radius.circular(25))),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              name,
-              style: TextStyle(color: foregroundColor, fontSize: 20),
-            ),
-            SizedBox(
-              width: 2,
-            ),
-            Image.asset(
-              "images/$name@X2.png",
-              height: 50,
-              // width: name == "Web"
-              //     ? 50
-              //     : name == "Desktop"
-              //         ? 38
-              //         : 45,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

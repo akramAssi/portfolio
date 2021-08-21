@@ -19,7 +19,8 @@ Widget portfolioAppBar(
               Navigator.of(context).pop();
             },
             icon: Image.asset(
-              "images/back_button_1.5.png",
+              "images/back_button_2.png",
+              height: 15,
             ),
           ),
     title: title != null

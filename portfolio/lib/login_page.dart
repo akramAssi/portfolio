@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/edit_pages/home_page_edit.dart';
 import 'package:portfolio/res/color.dart';
-import 'package:portfolio/widget/app_bar.dart';
-import 'package:portfolio/widget/image_slider.dart';
+import 'package:portfolio/portfolio_function.dart';
+import 'package:portfolio/widget/app_bar_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -78,7 +79,9 @@ class LoginPage extends StatelessWidget {
                             primary: AppColor.dairyCreamBackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
-                        onPressed: () {},
+                        onPressed: () {
+                          openPage(context, HomePageEdit());
+                        },
                         child: Text(
                           "Login",
                           style: TextStyle(
