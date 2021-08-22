@@ -90,12 +90,12 @@ TextField editText(
     // readOnly: editable,
     selectionControls: null,
     decoration: InputDecoration(
-        border: InputBorder.none,
-        focusedBorder: InputBorder.none,
-        enabledBorder: InputBorder.none,
-        errorBorder: InputBorder.none,
+        // border: InputBorder.none,
+        // focusedBorder: InputBorder.none,
+        // enabledBorder: InputBorder.none,
+        // errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
-        contentPadding: EdgeInsets.zero,
+        contentPadding: EdgeInsets.symmetric(vertical: 5),
         isDense: true,
         hintText: "Hint here"),
   );
